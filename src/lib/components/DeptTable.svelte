@@ -1,17 +1,7 @@
 <script lang="ts">
-	interface Job {
-		partRef: string;
-		partNumber: string;
-		run: string;
-		queueDiff: string;
-		qty: number;
-		customer: string;
-		schedDate: string;
-		priority: number;
-		comments: string;
-	}
-
-	export let deptData: Job[];
+	import type { Job } from "$lib/types";
+	
+	export let deptData:Job[]
 </script>
 
 {#if deptData}

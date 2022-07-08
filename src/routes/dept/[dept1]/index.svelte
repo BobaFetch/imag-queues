@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { api } from '$lib/api';
 	import DeptTable from '$lib/components/DeptTable.svelte';
+	import DailyChart from '$lib/components/DailyChart.svelte';
+	import type { Department } from '$lib/types';
 
 	const { log } = console;
 
-	let data;
+	let data:Department;
 	let loading = true;
 
 	const { dept1 } = $page.params;
@@ -38,8 +40,12 @@
 					<div class="col-span-10 border border-black">
 						<DeptTable deptData={data.parts} />
 					</div>
-					<section class="text-left col-span-2">This is where the stats will go</section>
 				</div>
+			</div>
+		</div>
+		<div class="grid grid-cols-12 gap-2 border border-black">
+			<div class='col-span-6'>
+				<DailyChart stats={data.employeeStats} />
 			</div>
 		</div>
 	{/if}
