@@ -11,7 +11,7 @@
     labels: stats.map((i) => i.employee.trim()),
     datasets: [
       {
-        label: 'Employee Stats',
+        label: 'Jobs Completed',
         data: stats.map((n) => n.completedJobs),
         backgroundColor: ['#d8495f', '#32909e', '#cc3284', '#328c7b', '#904493', '#41945e', '#8633d0', '#ae7b38', '#5d73d7', '#d25935'],
         hoverOffset: 2,
@@ -44,7 +44,7 @@
         },
         title: {
           display: true,
-          text: 'Employee Stats',
+          text: 'Jobs Completed Per Employee',
           color: 'black'
         }
       }
@@ -58,5 +58,5 @@
 </script>
 
 <div>
-  <canvas bind:this={employeeChart} class="w-fit border border-black" />
+  <canvas bind:this={employeeChart} class="w-fit" />
 </div>
