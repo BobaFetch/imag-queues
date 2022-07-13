@@ -1,4 +1,5 @@
 <script lang="ts">
+	//TODO: fix Department type
 	import { page } from '$app/stores';
 	import { onDestroy, onMount } from 'svelte';
 	import { api } from '$lib/api';
@@ -12,7 +13,6 @@
 
 	let data:Department;
 	let loading = true;
-	// let reloadInterval;
 
 	const { dept1 } = $page.params;
 
@@ -31,14 +31,13 @@
 		getDepartmentData();
 		setInterval(() => {
 			const time = new Date(Date.now())
-			console.log({'reloaded':time.toLocaleTimeString()})
 			getDepartmentData()
 		}, 300000)
 	});
 
 </script>
 
-<div class="grid grid-rows-6">
+<div class="flex flex-col md:grid md:grid-rows-6">
 	{#if loading}
 		<div class="row-span-6 flex items-center justify-center">
 			<Spinner />
@@ -63,7 +62,7 @@
 				</div>
 			</div>
 			<div class="row-span-5">
-				<div class="grid grid-cols-12 gap2">
+				<div class="flex flex-col lg:grid lg:grid-cols-12 gap2">
 					<div class="col-span-9 gap-2 px-2">
 						<div class="border border-black">
 							<DeptTable deptData={data.parts} />

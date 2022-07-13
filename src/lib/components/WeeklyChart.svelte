@@ -41,6 +41,12 @@
           text: 'Weekly Stats',
           color: 'black',
         }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
       }
     }
   }
@@ -48,7 +54,6 @@
   onMount(() => {
     const ctx = weeklyChart.getContext('2d');
     let myChart = new Chart(ctx, config);
-    console.log(stats)
   })
 </script>
 
