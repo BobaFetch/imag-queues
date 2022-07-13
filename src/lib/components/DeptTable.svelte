@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Job } from "$lib/types";
+	import { convertTime } from '$lib/utils'
 	
 	export let deptData:Job[]
 </script>
@@ -23,7 +24,7 @@
 				<tr>
 					<td class="border border-black p-1">{job.partNumber}</td>
 					<td class="border border-black p-1 text-center">{job.run}</td>
-					<td class="border border-black p-1 text-center">{job.queueDiff}</td>
+					<td class="border border-black p-1 text-center">{convertTime(job.queueDiff)}</td>
 					<td class="border border-black p-1 text-center">{job.qty}</td>
 					<td class="border border-black p-1">{job.customer}</td>
 					<td class="border border-black p-1 text-center">{new Date(job.schedDate).toLocaleDateString()}</td>

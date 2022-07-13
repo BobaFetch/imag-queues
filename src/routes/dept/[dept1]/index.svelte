@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { api } from '$lib/api';
 	import DeptTable from '$lib/components/DeptTable.svelte';
 	import DailyChart from '$lib/components/DailyChart.svelte';
+	import WeeklyChart from '$lib/components/WeeklyChart.svelte';
+	import Spinner from '$lib/components/Spinner.svelte';
 	import type { Department } from '$lib/types';
 
 	const { log } = console;
 
 	let data:Department;
 	let loading = true;
+	// let reloadInterval;
 
 	const { dept1 } = $page.params;
 
@@ -26,17 +29,25 @@
 	onMount(() => {
 		loading = true;
 		getDepartmentData();
+		setInterval(() => {
+			const time = new Date(Date.now())
+			console.log({'reloaded':time.toLocaleTimeString()})
+			getDepartmentData()
+		}, 300000)
 	});
+
 </script>
 
-<div class="">
+<div class="grid grid-rows-6">
 	{#if loading}
-		<h1>LOADING...</h1>
+		<div class="row-span-6 flex items-center justify-center">
+			<Spinner />
+		</div>
 	{:else}
-		<div class="grid grid-rows-6">
+		<!-- <div class="grid grid-rows-6"> -->
 			<div class="row-span-1 my-auto">
 				<h2 class="text-5xl py-3 px-2 text-center">{data.department.name}</h2>
-				<div class="flex items-center justify-around">
+				<div class="flex items-center justify-evenly py-2">
 					<div class="text-center">
 						<h5 class="text-2xl">Daily Goal</h5>
 						<h6 class="text-xl">{data.stats.dailyGoal}</h6>
@@ -52,17 +63,23 @@
 				</div>
 			</div>
 			<div class="row-span-5">
-				<div class="grid grid-cols-12 gap-2 px-2">
-					<div class="col-span-12 border border-black">
-						<DeptTable deptData={data.parts} />
+				<div class="grid grid-cols-12 gap2">
+					<div class="col-span-9 gap-2 px-2">
+						<div class="border border-black">
+							<DeptTable deptData={data.parts} />
+						</div>
 					</div>
-				</div>
+					{#if data.employeeStats}
+					<!-- <div class="grid g gap-2 p-2"> -->
+						<div class="col-span-3 px-2">
+								<DailyChart stats={data.employeeStats} />
+								<WeeklyChart goal={data.stats.dailyGoal} stats={data.stats.weeklyStats}/>
+						</div>
+						<!-- </div> -->
+						{/if}
+					</div>
 			</div>
-		</div>
-		<div class="grid grid-cols-12 gap-2 p-2">
-			<div class='col-span-6'>
-				<DailyChart stats={data.employeeStats} />
-			</div>
-		</div>
+		<!-- </div> -->
+		
 	{/if}
 </div>
