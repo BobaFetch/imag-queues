@@ -15,7 +15,7 @@
 </script>
 
 {#if searching}
-	<h1 class="text-4xl font-bold">Searching...</h1>
+	<h1 class="text-4xl font-bold"></h1>
 {:else if partList.length > 0}
 	<!-- display the list of open jobs for part number -->
 	<!-- more tables -->

@@ -1,15 +1,15 @@
-export interface DailyStats {
+export type DailyStats = {
   dailyGoal: number;
   completedJobs: number;
   completedParts: number;
 }
 
-export interface EmployeeStats {
+export type EmployeeStats = {
   employee: string;
   completedJobs: number;
 }
 
-export interface Job {
+export type Job = {
   partRef: string;
   partNumber: string;
   run: string;
@@ -21,12 +21,24 @@ export interface Job {
   queueDiff: number;
 }
 
-export interface Department {
+export type Department = {
   department: {
     name: string;
     number: string;
   };
   parts: Job[];
-  stats: DailyStats;
+  stats: DepartmentStats;
   employeeStats: EmployeeStats[];
+}
+
+export type DepartmentStats = {
+  dailyGoal: number;
+  completedJobs: number;
+  completedParts: number;
+  weeklyStats: WeeklyStats[]
+}
+
+export type WeeklyStats = {
+  completedJobs: number;
+  completionDate: string;
 }

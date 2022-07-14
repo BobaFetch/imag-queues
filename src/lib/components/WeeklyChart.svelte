@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
+  import type { WeeklyStats } from '$lib/types';
   
-  import Chart from 'chart.js/auto/auto.js'
+  import Chart from 'chart.js/auto/auto'
   
-  export let stats: any
+  export let stats: WeeklyStats[]
   export let goal: number
 
   let weeklyChart:HTMLCanvasElement;
@@ -20,7 +21,7 @@
       },
       {
         label: 'Goal',
-        data: [goal, goal, goal, goal, goal, goal],
+        data: stats.map((i) => goal),
         borderColor: 'rgb(255, 125, 125)'
       }
     ]

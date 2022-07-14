@@ -163,7 +163,7 @@ export const departments= [
       },
       {
         name: "Mori Seki 3-Axis",
-        wcNumber: "00602"
+        wcNumber: "0602"
       },
       {
         name: "Okuma MB 5000",
